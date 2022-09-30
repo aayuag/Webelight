@@ -28,7 +28,7 @@ function App() {
       <Route path="/register"  exact element={<SignProtected><Signup/></SignProtected>}/>
 
      </Routes>
-     <SignIn/>
+     
      
 
 

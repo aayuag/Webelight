@@ -2,9 +2,10 @@ import React from 'react'
 import  {useSelector} from 'react-redux'
 import {useDispatch} from 'react-redux'
 import {addCart,delCart} from '../redux/action/index'
-import axios from 'axios'
+import {useNavigate} from 'react-router-dom';
 
 const Cart = () => {
+    const history=useNavigate()
     const order=useSelector((state)=>state.handleCart)
     const dispatch=useDispatch()
     const handleincrement=(product)=>{
@@ -15,20 +16,26 @@ const Cart = () => {
     }
     let token=localStorage.getItem('authorization')
     const handleorder=()=>{
-        axios({
-            url: "http://localhost:3001/order/add",
+        fetch("http://localhost:3001/order/add", {
             method: "POST",
-            headers: {
-                authorization:token
+            body : JSON.stringify({
+                 order
+            }),
+            headers : {
+             authorization: token,
+             "Content-Type": "application/json"
             },
-            data: order
-        }).then((loginData)=> {    
-         
-          window.location.reload(false);
-        }).catch((err)=> {
-            alert(err.response.data)
-            
-        })
+          }).then((res) => {
+           console.log(res)
+           window.location.reload(false);
+            history("/")
+        
+       
+          }).catch((err) => {
+           console.log(err)
+          })
+
+        
     }
     // console.log(state)
   return (

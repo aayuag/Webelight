@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
-import {useNavigate} from 'react-router-dom';
+
 import axios from 'axios'
 
 const SignIn = () => {
-    const history=useNavigate()
+    
 
     const [login, setLogin] = useState({email: "", password: ""})
     const [err,setErr]=useState("")
